@@ -34,15 +34,15 @@ namespace csharp
               Console.WriteLine(listAge[i]);
             }
             // Nome Comparator
-            Person[] listFirstName = comparator.Compare(nipote, nonno, new FirstNameComparator());
-            Console.WriteLine("La prima persona in ordine di nome è :"+listFirstName[0].firstName);//Aristide Merotti
+            Person[] listFirstName = comparator.Compare(arrayPerson, new FirstNameComparator());
+            //Console.WriteLine("La prima persona in ordine di nome è :"+listFirstName[0].firstName);//Aristide Merotti
             Console.WriteLine("Classifica ordinata per il nome");
             for (i = 0; i <= listFirstName.lenght; i++) {
               Console.WriteLine(listFirstName[i]);
             }
             //Cognome Comparator
-            Person[] listLastName = comparator.Compare(nipote, nonno, new LastNameComparator());
-            Console.WriteLine("La prima persona in ordine di cognome è :"+listLastName[0].lastName);//Luca Cippo
+            Person[] listLastName = comparator.Compare(arrayPerson, new LastNameComparator());
+            //Console.WriteLine("La prima persona in ordine di cognome è :"+listLastName[0].lastName);//Luca Cippo
             Console.WriteLine("Classifica ordinata per il cognome");
             for (i = 0; i <= listLastName.lenght; i++) {
               Console.WriteLine(listLastName[i]);
@@ -58,8 +58,8 @@ namespace csharp
     {
         public Person[] Sort(Person[] arrayPerson)
         {
-            /*Person[] result = new Person[2];
-
+            Person[] result = new Person[arrayPerson.Count];
+            /*
             if(p1.age > p2.age){
                 result[0] = p2;
                 result[1] = p1;
