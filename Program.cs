@@ -77,12 +77,14 @@ namespace csharp
     class Person
     {
         public int age;
-        public string name;
+        public string firstName;
+        public string lastName;
 
-        public Person(int a, string n)
+        public Person(int a, string firstName, string lastName)
         {
             age = a;
-            name = n;
+            this.firstName = firstName;
+            this.lastName = lastName;
         }
     }
 }
