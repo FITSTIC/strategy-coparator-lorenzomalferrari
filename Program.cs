@@ -59,15 +59,24 @@ namespace csharp
         public Person[] Sort(Person[] arrayPerson)
         {
             Person[] result = new Person[arrayPerson.Count];
-            /*
-            if(p1.age > p2.age){
-                result[0] = p2;
-                result[1] = p1;
-            }else{
-                result[0] = p1;
-                result[1] = p2;
+            //Bubble Sort
+            int i;
+            int j;
+            int temp;
+
+            for (i = (x - 1); i >= 0; i--)
+            {
+              for (j = 1; j <= i; j++)
+              {
+                if (arrayPerson[j - 1].age > arrayPerson[j].age)
+                {
+                  temp = arrayPerson[j - 1];
+                  arrayPerson[j - 1] = arrayPerson[j];
+                  arrayPerson[j] = temp;
+                }
+              }
             }
-            */
+            result = arrayPerson;
             return result;
         }
     }
@@ -76,7 +85,7 @@ namespace csharp
     */
     class FirstNameComparator : IPersonStrategy
     {
-        public Person[] Sort(Person p1, Person p2)
+        public Person[] Sort(Person arrayPerson)
         {
             Person[] result = new Person[2];
 
@@ -95,7 +104,7 @@ namespace csharp
     */
     class LastNameComparator : IPersonStrategy
     {
-        public Person[] Sort(Person p1, Person p2)
+        public Person[] Sort(Person arrayPerson)
         {
             Person[] result = new Person[2];
 
