@@ -6,7 +6,7 @@ namespace csharp
     {
         static void Main(string[] args)
         {
-          /*
+          
             var nipote = new Person(6, "Luca", "Cippo");
             var nonno = new Person(75, "Aristide", "Merotti");
             var mario = new Person(75, "Mario", "Perotti");
@@ -14,38 +14,25 @@ namespace csharp
             var lorenzo = new Person(75, "Lorenzo", "Verratti");
             var marcello = new Person(75, "Marcello", "Ciccio");
             var davide = new Person(75, "Davide", "Basso");
-          */
+          
 
-            Person[] arrayPerson = [6, "Luca", "Cippo"];
-            Person[] arrayPerson = [24, "Aristide", "Merotti"];
-            Person[] arrayPerson = [43, "Mario", "Perotti"];
-            Person[] arrayPerson = [33, "Gino", "Negro"];
-            Person[] arrayPerson = [71, "Lorenzo", "Verratti"];
-            Person[] arrayPerson = [12, "Marcello", "Ciccio"];
-            Person[] arrayPerson = [100, "Davide", "Basso"];
+            Person[] arrayPerson = {nipote,nonno,mario,gino,lorenzo,marcello,davide};
 
             var comparator = new PersonComparator();
 
             // Età Comparator
             Person[] listAge = comparator.Compare(arrayPerson, new AgeComparator());
             //Console.WriteLine("La persona più giovane è :"+listAge[0].name);//Luca Cippo
-            Console.WriteLine("Classifica ordinata per l'età");
+            Console.WriteLine("Classifica ordinata per l'età:");
             for (i = 0; i <= listAge.lenght; i++) {
               Console.WriteLine(listAge[i]);
             }
             // Nome Comparator
-            Person[] listFirstName = comparator.Compare(arrayPerson, new FirstNameComparator());
+            Person[] listFirstName = comparator.Compare(arrayPerson, new NameComparator());
             //Console.WriteLine("La prima persona in ordine di nome è :"+listFirstName[0].firstName);//Aristide Merotti
             Console.WriteLine("Classifica ordinata per il nome");
             for (i = 0; i <= listFirstName.lenght; i++) {
               Console.WriteLine(listFirstName[i]);
-            }
-            //Cognome Comparator
-            Person[] listLastName = comparator.Compare(arrayPerson, new LastNameComparator());
-            //Console.WriteLine("La prima persona in ordine di cognome è :"+listLastName[0].lastName);//Luca Cippo
-            Console.WriteLine("Classifica ordinata per il cognome");
-            for (i = 0; i <= listLastName.lenght; i++) {
-              Console.WriteLine(listLastName[i]);
             }
             Console.ReadLine();
         }
@@ -81,43 +68,39 @@ namespace csharp
         }
     }
     /*
-    * Comparatore del Nome
+    * Comparatore del Nome e Cognome
     */
-    class FirstNameComparator : IPersonStrategy
+    class NameComparator : IPersonStrategy
     {
-        public Person[] Sort(Person arrayPerson)
+        public Person[] Sort(Person[] arrayPerson)
         {
-            Person[] result = new Person[2];
-
-            if(p1.firstName.CompareTo(p2.firstName) > 0){
-                result[0] = p2;
-                result[1] = p1;
-            }else{
-                result[0] = p1;
-                result[1] = p2;
+            Person[] result = new Person[arrayPerson.lenght];
+            for (int i = 0; i < arrayPerson.length-1; i++)
+			{
+                if(arrayPerson[i].firstName.CompareTo(arrayPerson[i+1].firstName) > 0){
+                result[i] = arrayPerson[i+1];
+                result[i+1] = arrayPerson[i];
             }
+            else if (arrayPerson[i].firstName.CompareTo(arrayPerson[i+1].firstName) < 0){
+                result[i] = arrayPerson[i];
+                result[i+1] = arrayPerson[i+1];
+            }
+            else{
+                if(arrayPerson[i].lastName.CompareTo(arrayPerson[i+1].lastName) > 0){
+                    result[i] = arrayPerson[i+1];
+                    result[i+1] = arrayPerson[i];
+                }
+                else if (arrayPerson[i].lastName.CompareTo(arrayPerson[i+1].lastName) < 0){
+                    result[i] = arrayPerson[i];
+                    result[i+1] = arrayPerson[i+1];
+                }
+            }
+			}
+            
             return result;
         }
     }
-    /*
-    * Comparatore del Cognome
-    */
-    class LastNameComparator : IPersonStrategy
-    {
-        public Person[] Sort(Person arrayPerson)
-        {
-            Person[] result = new Person[2];
-
-            if(p1.lastName.CompareTo(p2.lastName) > 0){
-                result[0] = p2;
-                result[1] = p1;
-            }else{
-                result[0] = p1;
-                result[1] = p2;
-            }
-            return result;
-        }
-    }
+    
 
     interface IPersonStrategy
     {
